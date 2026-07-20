@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: tafp-api
+    runtime: python
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.8
+      - key: FIRMS_MAP_KEY
+        sync: false
+      - key: FRONTEND_ORIGINS
+        sync: false
+
